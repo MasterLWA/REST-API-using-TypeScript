@@ -34,4 +34,11 @@ let mongoURL = 'mongodb+srv://admin:admin@research-buddy.yw0yvdp.mongodb.net/?re
 mongoose.promise = Promise; //overwrite mongoose promise
 mongoose.connect(mongoURL);
 
-mongoose.connection.on('error',(error:Error) => console.log('MongoDB connection error: ${err}'));
+
+try{
+    //mongoose.connection.on('error',(error:Error) => console.log('MongoDB connection error: ${err}'));
+    mongoose.connection.once('open', () => console.log('MongoDB connected!'));
+}   catch (error) {
+    console.log(error);
+}
+    
